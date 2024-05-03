@@ -8,17 +8,22 @@
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",
+    "test": "playwright test",
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@remix-run/node": "^2.9.1",
-    "@remix-run/react": "^2.9.1",
-    "@remix-run/serve": "^2.9.1",
-    "isbot": "^4.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@remix-run/node": "2.9.1",
+    "@remix-run/react": "2.9.1",
+    "@remix-run/serve": "2.9.1",
+    "@tanstack/react-query": "5.35.1",
+    "isbot": "4.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "viem": "2.9.31",
+    "wagmi": "2.8.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.43.1",
     "@remix-run/dev": "^2.9.1",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
