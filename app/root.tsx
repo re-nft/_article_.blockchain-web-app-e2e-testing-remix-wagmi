@@ -1,3 +1,4 @@
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import {
   Links,
   Meta,
@@ -5,8 +6,14 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { useState } from "react";
+import { WagmiProvider } from "wagmi";
+
+import { config } from "~/wagmi";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(new QueryClient());
+  const [wagmiConfig] = useState(config);
   return (
     <html lang="en">
       <head>
@@ -16,7 +23,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <QueryClientProvider client={queryClient}>
+          <WagmiProvider config={wagmiConfig}>{children}</WagmiProvider>
+        </QueryClientProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
