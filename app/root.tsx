@@ -6,14 +6,31 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { WagmiProvider } from "wagmi";
 
-import { config } from "~/wagmi";
+import { config, createMockConfig } from "~/wagmi";
+
+declare global {
+  interface Window {
+    _setupAccount: typeof createMockConfig;
+  }
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(new QueryClient());
-  const [wagmiConfig] = useState(config);
+  const [wagmiConfig, setWagmiConfig] = useState(config);
+
+  const _setupAccount = useCallback(
+    (...args: Parameters<Window["_setupAccount"]>) => {
+      const config = createMockConfig(...args);
+      setWagmiConfig(config);
+    },
+    []
+  );
+
+  if (typeof window !== "undefined") window._setupAccount = _setupAccount;
+
   return (
     <html lang="en">
       <head>
