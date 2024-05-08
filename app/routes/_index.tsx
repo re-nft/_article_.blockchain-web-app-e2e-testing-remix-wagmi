@@ -5,6 +5,7 @@ import {
   useDisconnect,
   useBlock,
   useSwitchChain,
+  useChainId,
 } from "wagmi";
 
 export const meta: MetaFunction = () => {
@@ -15,7 +16,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  const { address, chain, isConnected } = useAccount();
+  const { address, isConnected } = useAccount();
+  const chainId = useChainId();
   const { connectAsync, connectors } = useConnect();
   const { disconnect } = useDisconnect();
   const { chains, switchChainAsync } = useSwitchChain();
@@ -36,13 +38,13 @@ export default function Index() {
 
         <p style={{ display: "flex", gap: 8 }}>
           Chain:
-          {chains.map((c) => (
+          {chains.map((chain) => (
             <button
-              key={c.id}
-              onClick={() => void switchChainAsync({ chainId: c.id })}
+              key={chain.id}
+              onClick={() => void switchChainAsync({ chainId: chain.id })}
               type="button"
             >
-              {c === chain && "✅"} {c.name} ({c.id})
+              {chain.id === chainId && "✅"} {chain.name} ({chain.id})
             </button>
           ))}
         </p>
