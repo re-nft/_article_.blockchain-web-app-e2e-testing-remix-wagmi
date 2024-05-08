@@ -1,6 +1,14 @@
-# Welcome to Remix + Vite!
+# Blockchain Application Testing 101
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+This is the accompanying demo repository for my [article on testing blockchain applications with Playwright, Anvil, and Wagmi](https://www.rombrom.com/posts/testing-dapps-with-playwright-anvil-wagmi/). Be sure to check it out if you need any extra guidance!
+
+## Setting up
+
+Make sure you have a relatively recent version of [Node](https://nodejs.org/en) installed. Make sure you have [Foundry's Anvil](https://book.getfoundry.sh/) (or a comparable testnet node service) installed.
+
+```
+npm install
+```
 
 ## Development
 
@@ -10,27 +18,24 @@ Run the Vite dev server:
 npm run dev
 ```
 
-## Deployment
+Run the following in parallel:
 
-First, build your app for production:
+```shellscript
+anvil
+```
 
-```sh
+## Testing
+
+When you have the development server and anvil running, it's very helpful to
+run tests with Playwright's UI mode:
+
+```shellscript
+npm test -- --ui
+```
+
+If you want to test against a prod build and have anvil spun up automatically:
+
+```shellscript
 npm run build
+npm test
 ```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
