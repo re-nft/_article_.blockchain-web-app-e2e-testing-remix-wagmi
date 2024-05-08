@@ -1,5 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
+import {
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useBlock,
+  useSwitchChain,
+} from "wagmi";
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,8 +19,18 @@ export default function Index() {
   const { connectAsync, connectors } = useConnect();
   const { disconnect } = useDisconnect();
   const { chains, switchChainAsync } = useSwitchChain();
+
+  const { data: block } = useBlock();
+  const blockTime = new Date(Number(block?.timestamp) * 1000).toUTCString();
+  const browserTime = new Date().toUTCString();
+
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+      <div style={{ padding: 16, marginBottom: 16, border: "solid 1px" }}>
+        <p>Block time: {blockTime}</p>
+        <p>Browser time: {browserTime}</p>
+      </div>
+
       <div style={{ padding: 16, border: "solid 1px" }}>
         <p>Connected: {address ?? "no"}</p>
 
