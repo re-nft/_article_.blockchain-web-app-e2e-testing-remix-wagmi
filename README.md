@@ -1,6 +1,6 @@
 # Blockchain Application Testing 101
 
-This is the accompanying demo repository for my [article on testing blockchain applications with Playwright, Anvil, and Wagmi](https://www.rombrom.com/posts/testing-dapps-with-playwright-anvil-wagmi/). Be sure to check it out if you need any extra guidance!
+This is the accompanying demo repository for our [article on testing blockchain applications with Playwright, Anvil, and Wagmi](https://paragraph.xyz/@021/end-to-end-testing-blockchain-applications-episode-2). Be sure to check it out if you need any extra guidance!
 
 ## Setting up
 
